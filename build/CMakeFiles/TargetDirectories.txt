@@ -1,0 +1,3 @@
+/home/thiago/code/c++/games/pokemonStadium/build/CMakeFiles/pokemon_stadium.dir
+/home/thiago/code/c++/games/pokemonStadium/build/CMakeFiles/edit_cache.dir
+/home/thiago/code/c++/games/pokemonStadium/build/CMakeFiles/rebuild_cache.dir
