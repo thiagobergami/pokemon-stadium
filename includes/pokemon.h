@@ -5,30 +5,32 @@
 #include <string>
 #include <vector>
 
-#include "PokemonType.h"
-
 using namespace std;
 
 class Pokemon
 {
 public:
     Pokemon(const string &name,
-            const vector<PokemonType *> &types,
+            const vector<string> types,
             int hitPoints,
-            const int attack, const int defense);
+            const int attack,
+            const int defense);
 
     ~Pokemon();
 
     string GetName();
     void Print();
-    vector<PokemonType *> GetTypes();
+    vector<string> GetTypes();
     int GetAttack();
     int GetDefense();
+    void ressurrectPokemon();
+    void takeDamage(int damage);
 
 private:
     string m_name;
-    vector<PokemonType *> m_types;
+    vector<string> m_types;
     int m_hitPoints;
+    bool m_isAlive;
     int m_attack;
     int m_defense;
 };
