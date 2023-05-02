@@ -9,7 +9,7 @@ using namespace std;
 class Moves
 {
 public:
-    Moves(const string m_name, const string m_type, const int power);
+    Moves(const string name, const string type, const int power, const string class_name);
     ~Moves();
     string getMoveName();
     int getPower();
@@ -18,6 +18,7 @@ private:
     string m_name;
     string m_type;
     int m_power;
+    string m_class;
 };
 
 #endif

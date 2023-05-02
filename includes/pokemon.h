@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+#include "moves.h"
 
 using namespace std;
 
@@ -12,9 +14,11 @@ class Pokemon
 public:
     Pokemon(const string &name,
             const vector<string> types,
-            int hitPoints,
+            const map<string, double> multipliers,
+            const int hitPoints,
             const int attack,
-            const int defense);
+            const int defense,
+            const int special);
 
     ~Pokemon();
 
@@ -29,10 +33,13 @@ public:
 private:
     string m_name;
     vector<string> m_types;
+    map<string, double> m_multipliers;
     int m_hitPoints;
     bool m_isAlive;
     int m_attack;
     int m_defense;
+    int m_special;
+    vector<Moves *> m_moves;
 };
 
 #endif

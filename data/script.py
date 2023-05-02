@@ -1,21 +1,27 @@
-""" Script to convert all csv to JSONs"""
-
 import pandas as pd
 import requests
 import csv
+import time
+
+
+def makeARequest(url):
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print('Error: {}'.format(response.status_code))
+
 
 metadata = {
     'description': 'Pokemon dataset',
     'creator': 'Your name',
-    'columns': ['name', 'type', 'multipliers', 'hp', 'attack', 'defense', 'moves']
+    'columns': ['name', 'type', 'multipliers', 'hp', 'attack', 'defense', 'special', 'moves']
 }
-
-
-#df = pd.DataFrame(pokemon_dataset, columns=metadata['columns'])
 pokemon_dataset = []
 
 original_url = 'https://pokeapi.co/api/v2/pokemon/'
-
+start_running = time.time()
 # Define the path to the CSV file
 csv_path = 'FirstGenPokemon.csv'
 
@@ -29,9 +35,12 @@ with open(csv_path, 'r') as csvfile:
 
     # Iterate over each row in the CSV file
     for row in csvreader:
+        start_time = time.time()
+        pokemon_numer = row["Number"]
         pokemon_name = row["Name"].lower()
         pokemon_type = [row["Type1"].lower(), row["Type2"].lower()]
         """ Normal,Fire,Water,Eletric,Grass,Ice,Fight,Poison,Ground,Flying,Psychic,Bug,Rock,Ghost,Dragon """
+        print("Generating "+pokemon_name + " moves...")
 
         multipliers = {
             'normal': row["Normal"],
@@ -53,19 +62,51 @@ with open(csv_path, 'r') as csvfile:
         pokemon_hp = row["HP"]
         pokemon_attack = row["Attack"]
         pokemon_defense = row["Defense"]
-        
-
+        pokemon_special = row["Special"]
         url = original_url+pokemon_name
-        response = requests.get(url)
+        response = makeARequest(url)
+        pokemon_moves = []
 
-        # Check if the request was successful
-        if response.status_code == 200:
-            # Print the response data
-            pokeon_response = response.json()
-            for move in pokeon_response["moves"]:
-                print(move["move"])
-                print("////")
-        else:
-            # Print an error message
-            print('Error: {}'.format(response.status_code))
-        break
+        count = 0
+        for move in response["moves"]:
+            pokemon_move = move["move"]["name"]
+            move_url = move["move"]["url"]
+
+            move_response = makeARequest(move_url)
+            move_type = move_response["type"]["name"]
+            move_power = move_response["power"]
+            move_class = move_response["damage_class"]["name"]
+
+            pokemon_moves.append({
+                'name': pokemon_move,
+                'type': move_type,
+                'power': move_power,
+                'class': move_class
+            })
+            count += 1
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(pokemon_name+" moves generated: " + str(count))
+        print("Execution time:", execution_time, "seconds")
+
+        pokemon = {
+            'number': pokemon_numer,
+            'name': pokemon_name,
+            'type': pokemon_type,
+            'multipliers': multipliers,
+            'hp': pokemon_hp,
+            'attack': pokemon_attack,
+            'defense': pokemon_defense,
+            'special': pokemon_special,
+            'moves': pokemon_moves
+        }
+        pokemon_dataset.append(pokemon)
+        time.sleep(2)
+
+df = pd.DataFrame(pokemon_dataset, columns=metadata['columns'])
+
+df.to_json('pokemon2.json', orient='records')
+
+end_running = time.time()
+running_time = end_running - start_running
+print("Script time:", running_time, "seconds")

@@ -9,7 +9,7 @@ class Pokedex : public Party
 public:
     Pokedex(const int totalPokemons);
 
-    virtual ~Pokedex(){};
+    virtual ~Pokedex();
 
     void Populate();
 
