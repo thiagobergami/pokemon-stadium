@@ -4,8 +4,12 @@
 
 int main()
 {
-    Pokedex pokedex(151);
-    pokedex.printParty();
+    Pokedex *pokedex = new Pokedex();
+    pokedex->printPokedex();
+
+    Pokemon charizard = pokedex->getPokemon("charizard");
+
+    charizard.Print();
 
     return 0;
 }

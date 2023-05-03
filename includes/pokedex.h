@@ -1,19 +1,30 @@
 #ifndef POKEDEX_H
 #define POKEDEX_H
 
-#include "party.h"
 #include "pokemon.h"
 
-class Pokedex : public Party
+#include <iostream>
+#include <map>
+#include <nlohmann/json.hpp>
+
+using namespace std;
+using json = nlohmann::json;
+
+class Pokedex
 {
 public:
-    Pokedex(const int totalPokemons);
+    Pokedex();
 
     virtual ~Pokedex();
 
+    Pokemon getPokemon(string pokemon);
     void Populate();
+    void printPokedex();
 
-    const Pokemon *getPokemon();
+private:
+    map<int, string> m_pokemons;
+    json m_data;
+    void ReadJsonData();
 };
 
 #endif
