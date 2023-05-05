@@ -30,6 +30,8 @@ public:
     int GetDefense();
     void ressurrectPokemon();
     void takeDamage(int damage);
+    void printPartyFormat();
+    int GetIndex();
 
 private:
     int m_index;

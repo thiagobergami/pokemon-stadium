@@ -27,6 +27,8 @@ Pokemon GenericPlayer::activatePokemon(int index) const
 {
     for (const auto &pokemon : m_pokemons)
     {
-        pokemon->Print();
+        if(index == pokemon->GetIndex()){
+            return pokemon
+        }
     }
 }

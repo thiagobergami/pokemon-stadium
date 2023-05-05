@@ -73,3 +73,22 @@ void Pokemon::takeDamage(int damage)
         cout << m_name << " Faited" << endl;
     }
 }
+
+void Pokemon::printPartyFormat()
+{
+    string isAlive;
+    if (m_isAlive == false)
+    {
+        isAlive = "Defeated";
+    }
+    else
+    {
+        isAlive = "Health";
+    }
+    cout << m_index << " - " << m_name << " - " << isAlive << endl;
+}
+
+int Pokemon::GetIndex()
+{
+    return m_index
+}

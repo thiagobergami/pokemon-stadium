@@ -17,6 +17,6 @@ void Party::printParty()
     for (const auto &pokemon : m_pokemons)
     {
         cout << "Pokemon: " ;
-        pokemon->Print();
+        pokemon->printPartyFormat();
     }
 };
