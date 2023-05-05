@@ -23,12 +23,34 @@ bool GenericPlayer::IsDefeated() const
     return m_isDefeated;
 }
 
-Pokemon GenericPlayer::activatePokemon(int index) const
+Pokemon* GenericPlayer::activatePokemon(int index)
 {
     for (const auto &pokemon : m_pokemons)
     {
-        if(index == pokemon->GetIndex()){
-            return pokemon
+        if (index == pokemon->GetIndex())
+        {
+            return pokemon;
         }
     }
+    cout << "Pokemon not found" << endl;
+    return nullptr;
+}
+/*
+
+Improve later
+
+*/
+bool GenericPlayer::validatePartyPokemon(int index)
+{
+    for (const auto &pokemon : m_pokemons)
+    {
+        if (index == pokemon->GetIndex())
+        {
+            return true;
+        }
+    }
+
+    cout << "Pokemon not found ";
+    cout << "\n\n";
+    return false;
 }

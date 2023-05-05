@@ -1,16 +1,15 @@
 #include "../includes/pokedex.h"
 #include "../includes/PokemonType.h"
 #include "../includes/pokemon.h"
-#include "../includes/genericPlayer.h"
+#include "../includes/player.h"
 
 int main()
 {
     Pokedex *pokedex = new Pokedex();
-    GenericPlayer *player = new GenericPlayer("Thiago", 1);
-    Pokemon *newPokemon = pokedex->getPokemon(1);
-    player->addPokemon(newPokemon);
-    player->printParty();
+    Player *player = new Player("Thiago", 3);
+    player->addPokemon(pokedex->getPokemon(1));
     player->activatePokemon(1);
+    player->ChangePokemon();
 
     return 0;
 }

@@ -90,5 +90,5 @@ void Pokemon::printPartyFormat()
 
 int Pokemon::GetIndex()
 {
-    return m_index
+    return m_index;
 }

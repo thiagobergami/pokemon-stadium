@@ -14,9 +14,10 @@ public:
     bool IsDefeated() const;
     void Win() const;
     void Loss();
-    Pokemon activatePokemon(int index) const;
+    Pokemon* activatePokemon(int index);
+    bool validatePartyPokemon(int index);
 
-private:
+protected:
     string m_Name;
     bool m_isDefeated;
 };
