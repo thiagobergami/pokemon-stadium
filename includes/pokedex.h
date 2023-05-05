@@ -17,7 +17,7 @@ public:
 
     virtual ~Pokedex();
 
-    Pokemon getPokemon(string pokemon);
+    Pokemon* getPokemon(int index);
     void Populate();
     void printPokedex();
 

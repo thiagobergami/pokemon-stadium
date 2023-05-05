@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import csv
 import time
-
+import json
 
 def makeARequest(url):
     response = requests.get(url)
@@ -18,7 +18,7 @@ metadata = {
     'creator': 'Your name',
     'columns': ['name', 'type', 'multipliers', 'hp', 'attack', 'defense', 'special', 'moves']
 }
-pokemon_dataset = []
+pokemon_dataset = {}
 
 original_url = 'https://pokeapi.co/api/v2/pokemon/'
 start_running = time.time()
@@ -36,7 +36,7 @@ with open(csv_path, 'r') as csvfile:
     # Iterate over each row in the CSV file
     for row in csvreader:
         start_time = time.time()
-        pokemon_numer = row["Number"]
+        pokemon_number = row["Number"]
         pokemon_name = row["Name"].lower()
         pokemon_type = [row["Type1"].lower(), row["Type2"].lower()]
         """ Normal,Fire,Water,Eletric,Grass,Ice,Fight,Poison,Ground,Flying,Psychic,Bug,Rock,Ghost,Dragon """
@@ -90,7 +90,6 @@ with open(csv_path, 'r') as csvfile:
         print("Execution time:", execution_time, "seconds")
 
         pokemon = {
-            'number': pokemon_numer,
             'name': pokemon_name,
             'type': pokemon_type,
             'multipliers': multipliers,
@@ -100,12 +99,13 @@ with open(csv_path, 'r') as csvfile:
             'special': pokemon_special,
             'moves': pokemon_moves
         }
-        pokemon_dataset.append(pokemon)
-        time.sleep(2)
+        pokemon_dataset[pokemon_number] = pokemon
 
-df = pd.DataFrame(pokemon_dataset, columns=metadata['columns'])
 
-df.to_json('pokemon2.json', orient='records')
+json_string = json.dumps(pokemon_dataset, indent=2)
+
+with open('pokedex2.json', 'w') as file:
+    file.write(json_string)
 
 end_running = time.time()
 running_time = end_running - start_running

@@ -1,6 +1,6 @@
 #include "../includes/party.h"
 
-Party::Party(const int totalParty)
+Party::Party(const int totalParty = 6)
 {
     m_pokemons.reserve(totalParty);
 };
@@ -16,6 +16,7 @@ void Party::printParty()
 {
     for (const auto &pokemon : m_pokemons)
     {
+        cout << "Pokemon: " ;
         pokemon->Print();
     }
 };

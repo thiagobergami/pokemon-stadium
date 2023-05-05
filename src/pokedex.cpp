@@ -25,52 +25,51 @@ void Pokedex::ReadJsonData()
 void Pokedex::Populate()
 {
     cout << "Loading Pokedex..." << endl;
-    int i = 1;
-    for (json &obj : m_data)
+    for (auto &element : m_data.items())
     {
-        string name = obj["name"];
-        m_pokemons[i] = name;
-        ++i;
+        int index = stoi(element.key());
+        json &pokemon_data = element.value();
+        string name = pokemon_data["name"];
+        m_pokemons[index] = name;
     }
 
     cout << "Pokedex Loaded." << endl;
 }
 
-Pokemon Pokedex::getPokemon(string pokemon)
+Pokemon* Pokedex::getPokemon(int index)
 {
-    for (json &obj : m_data)
+    string key = to_string(index);
+    json &pokemon_data = m_data[key];
+
+    string name = pokemon_data["name"];
+
+    vector<string> types = pokemon_data["type"];
+
+    string string_hp = pokemon_data["hp"];
+    int hitPoints = stoi(string_hp);
+
+    string string_attack = pokemon_data["attack"];
+    int attack = stoi(string_attack);
+
+    string string_defense = pokemon_data["defense"];
+    int defense = stoi(string_defense);
+
+    string string_special = pokemon_data["special"];
+    int special = stoi(string_special);
+
+    map<string, double> multipliers;
+    for (const auto &item : pokemon_data["multipliers"].items())
     {
-        string name = obj["name"];
-        if (name == pokemon)
-        {
-            vector<string> types = obj["type"];
-
-            string string_hp = obj["hp"];
-            int hitPoints = stoi(string_hp);
-
-            string string_attack = obj["attack"];
-            int attack = stoi(string_attack);
-
-            string string_defense = obj["defense"];
-            int defense = stoi(string_defense);
-
-            string string_special = obj["special"];
-            int special = stoi(string_special);
-
-            map<string, double> multipliers;
-            for (const auto &item : obj["multipliers"].items())
-            {
-                multipliers[item.key()] = stod(item.value().get<string>());
-            }
-        
-            return Pokemon(
-                name,
-                types,
-                multipliers,
-                hitPoints,
-                attack,
-                defense,
-                special);
-        }
+        multipliers[item.key()] = stod(item.value().get<string>());
     }
-};
+    Pokemon *newPokemon = new Pokemon(
+        index,
+        name,
+        types,
+        multipliers,
+        hitPoints,
+        attack,
+        defense,
+        special);
+    return newPokemon;
+}

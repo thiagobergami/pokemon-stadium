@@ -12,7 +12,8 @@ using namespace std;
 class Pokemon
 {
 public:
-    Pokemon(const string &name,
+    Pokemon(const int &index,
+            const string &name,
             const vector<string> types,
             const map<string, double> multipliers,
             const int hitPoints,
@@ -31,6 +32,7 @@ public:
     void takeDamage(int damage);
 
 private:
+    int m_index;
     string m_name;
     vector<string> m_types;
     map<string, double> m_multipliers;
