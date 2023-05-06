@@ -36,7 +36,7 @@ void Pokedex::Populate()
     cout << "Pokedex Loaded." << endl;
 }
 
-Pokemon* Pokedex::getPokemon(int index)
+Pokemon *Pokedex::getPokemon(int index)
 {
     string key = to_string(index);
     json &pokemon_data = m_data[key];
@@ -72,4 +72,18 @@ Pokemon* Pokedex::getPokemon(int index)
         defense,
         special);
     return newPokemon;
+}
+
+bool Pokedex::validateIndex(int &index) const
+{
+    for (auto &element : m_data.items())
+    {
+        int jsonIndex = stoi(element.key());
+        if (jsonIndex == index)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

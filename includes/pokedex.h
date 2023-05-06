@@ -17,9 +17,10 @@ public:
 
     virtual ~Pokedex();
 
-    Pokemon* getPokemon(int index);
+    Pokemon *getPokemon(int index);
     void Populate();
     void printPokedex();
+    bool validateIndex(int &index) const;
 
 private:
     map<int, string> m_pokemons;
