@@ -14,12 +14,13 @@ public:
     bool IsDefeated() const;
     void Win() const;
     void Loss();
-    Pokemon* activatePokemon(int index);
+    Pokemon *activatePokemon(int index);
     bool validatePartyPokemon(int index);
 
 protected:
     string m_Name;
     bool m_isDefeated;
+    int totalPokemons;
 };
 
 #endif

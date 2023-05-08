@@ -1,10 +1,5 @@
 #include "../includes/pokemon.h"
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::vector;
-
 Pokemon::Pokemon(
     const int &index,
     const string &name,
@@ -13,16 +8,19 @@ Pokemon::Pokemon(
     int hitPoints,
     const int attack,
     const int defense,
-    const int special) : m_index(index),
-                         m_name(name),
-                         m_types(types),
-                         m_hitPoints(hitPoints),
-                         m_multipliers(multipliers),
-                         m_attack(attack),
-                         m_defense(defense),
-                         m_special(special)
+    const int special,
+    const vector<Move> moves) : m_index(index),
+                                m_name(name),
+                                m_types(types),
+                                m_hitPoints(hitPoints),
+                                m_multipliers(multipliers),
+                                m_attack(attack),
+                                m_defense(defense),
+                                m_special(special),
+                                m_moves(moves)
 {
     m_isAlive = true;
+    printPartyFormat();
 }
 
 Pokemon::~Pokemon(){};
@@ -76,6 +74,13 @@ void Pokemon::takeDamage(int damage)
 
 void Pokemon::printPartyFormat()
 {
+
+    for (const auto &move : m_moves)
+    {
+        cout << "Name :" << move.name << " - "
+             << "Type: " << move.type << endl;
+    }
+
     string isAlive;
     if (m_isAlive == false)
     {
@@ -91,4 +96,10 @@ void Pokemon::printPartyFormat()
 int Pokemon::GetIndex()
 {
     return m_index;
+}
+
+double Pokemon::GetMultiplier(const string &type)
+{
+    double dmg_multiplier = m_multipliers[type];
+    return dmg_multiplier;
 }

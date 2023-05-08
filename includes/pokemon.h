@@ -5,7 +5,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "moves.h"
+#include <algorithm>
+#include "move.h"
 
 using namespace std;
 
@@ -19,7 +20,8 @@ public:
             const int hitPoints,
             const int attack,
             const int defense,
-            const int special);
+            const int special,
+            const vector<Move> moves);
 
     ~Pokemon();
 
@@ -32,6 +34,7 @@ public:
     void takeDamage(int damage);
     void printPartyFormat();
     int GetIndex();
+    double GetMultiplier(const string &type);
 
 private:
     int m_index;
@@ -43,7 +46,7 @@ private:
     int m_attack;
     int m_defense;
     int m_special;
-    vector<Moves *> m_moves;
+    vector<Move> m_moves;
 };
 
 #endif
