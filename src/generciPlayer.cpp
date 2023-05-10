@@ -1,5 +1,6 @@
 #include "../includes/genericPlayer.h"
 #include "../includes/party.h"
+
 GenericPlayer::GenericPlayer(const string &name, const int &totalPokemons)
     : Party(totalPokemons), m_Name(name)
 {
@@ -23,7 +24,7 @@ bool GenericPlayer::IsDefeated() const
     return m_isDefeated;
 }
 
-Pokemon* GenericPlayer::activatePokemon(int index)
+Pokemon *GenericPlayer::activatePokemon(int index)
 {
     for (const auto &pokemon : m_pokemons)
     {
@@ -53,4 +54,36 @@ bool GenericPlayer::validatePartyPokemon(int index)
     cout << "Pokemon not found ";
     cout << "\n\n";
     return false;
+}
+
+double GenericPlayer::CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier)
+{
+    int A = 42; // considering all pokemons have level 100
+    int P = attacker_move.power;
+    int A_D;
+    if (attacker_move.move_class == "physical")
+    {
+        A_D = attacker_pokemon->GetAttack() / defenser_pokemon->GetDefense();
+    }
+    else
+    {
+        A_D = attacker_pokemon->GetSpecial() / defenser_pokemon->GetSpecial();
+    }
+
+    int bdmg = ((A * P * A_D) / 50) + 2; // base damage
+    double stab = 1.0;
+
+    for (const auto &type : attacker_pokemon->GetTypes())
+    {
+        if (type == attacker_move.name)
+        {
+            stab = 1.5;
+        }
+    }
+    srand(time(nullptr));
+    int randomNumber = rand() % 39 + 217;
+    
+    double damage = (bdmg * stab * modifier) / randomNumber;
+
+    return damage;
 }

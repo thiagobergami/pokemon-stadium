@@ -20,25 +20,27 @@ Cpu::~Cpu()
     cout << "\n\n";
 };
 
-int Cpu::giveDamageToPlayer(Pokemon *myPokemon, Pokemon *playerPokemon)
+void Cpu::GiveDamageToPlayer(Pokemon *my_pokemon, Pokemon *player_pokemon)
 {
-    vector<string> myType = myPokemon->GetTypes();
-    map<string, double> cpuMultiplier;
-    for (const string &type : myType)
+    vector<Move> myMoves = myPokemon->GetMoves();
+    double player_pokemon_multiplier = 0.0;
+    Move attacker_move = chosenMove[0];
+    for (const auto &move : myMoves)
     {
-        if (type != "")
+        double pokemon_type = playerPokemon->GetMultiplier(move.type);
+        if (pokemon_type = > player_pokemon_multiplier)
         {
-            double pokemonType = playerPokemon->GetMultiplier(type);
-            cpuMultiplier[type] = pokemonType;
+            player_pokemon_multiplier = pokemon_type;
+            if (move.power = > chosen_move.power)
+            {
+                attacker_move = move;
+            }
         }
     }
+    double damage = CalculateDamageCalculateDamage(attacker_move,
+                                                   attack_pokemon = my_pokemon,
+                                                   defenser_pokemon = player_pokemon,
+                                                   modifier = player_pokemon_multiplier);
 
-    /*
-    1 - Quais tipos do player pokemon?
-    2 - Contra quais desses tipos eu dou mais dano?
-    3 - Eu possuo golpes desse tipo?
-    4 - Dar golpe do tipo que eu sou mais forte.
-    */
-
-    return 0;
+    player_pokemon->takeDamage(damage);
 }

@@ -8,7 +8,7 @@
 #include <map>
 #include <nlohmann/json.hpp>
 #include <fstream>
-
+#include <algorithm>
 #include <random>
 #include <chrono>
 

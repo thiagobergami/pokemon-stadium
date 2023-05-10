@@ -7,7 +7,7 @@ int main()
 {
     Pokedex *pokedex = new Pokedex();
     Game *game = new Game();
-    char isCorrect = 'Y';
+    char isCorrect;
     string trainerName;
     do
     {

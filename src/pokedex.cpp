@@ -1,6 +1,11 @@
 #include "../includes/pokedex.h"
 #include <typeinfo>
 
+bool sortByPower(const Move &move1, const Move &move2)
+{
+    return move1.power > move2.power;
+}
+
 Pokedex::Pokedex()
 {
     ReadJsonData();
@@ -70,11 +75,6 @@ Pokemon *Pokedex::getPokemon(int index)
             ++while_validator;
         }
     }
-
-    for (const auto algo : types_to_choose)
-    {
-        cout << algo << endl;
-    }
     string string_hp = pokemon_data["hp"];
     int hitPoints = stoi(string_hp);
 
@@ -102,7 +102,8 @@ Pokemon *Pokedex::getPokemon(int index)
         myMove.move_class = move_data["class"].get<string>();
         all_moves.push_back(myMove);
     }
-    vector<Move> moves = DefineMoves(300, all_moves, types_to_choose);
+    sort(all_moves.begin(), all_moves.end(), sortByPower);
+    vector<Move> moves = DefineMoves(80, all_moves, types_to_choose);
 
     Pokemon *newPokemon = new Pokemon(
         index,

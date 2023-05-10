@@ -14,7 +14,7 @@ public:
 
     Pokemon *ChangePokemon();
 
-    int giveDamageToPlayer(Pokemon *myPokemon, Pokemon *playerPokemon);
+    int GiveDamageToPlayer(Pokemon *myPokemon, Pokemon *playerPokemon);
 
 private:
 };

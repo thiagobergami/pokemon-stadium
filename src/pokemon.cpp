@@ -60,7 +60,7 @@ int Pokemon::GetDefense()
 {
     return m_defense;
 }
-void Pokemon::takeDamage(int damage)
+void Pokemon::TakeDamage(int damage)
 {
     cout << m_name << "Takes " << damage << endl;
     m_hitPoints = m_hitPoints - damage;
@@ -98,8 +98,17 @@ int Pokemon::GetIndex()
     return m_index;
 }
 
+int Pokemon::GetSpecial()
+{
+    return m_special;
+};
+
 double Pokemon::GetMultiplier(const string &type)
 {
     double dmg_multiplier = m_multipliers[type];
     return dmg_multiplier;
+}
+vector<Move> Pokemon::GetMoves()
+{
+    return m_moves;
 }

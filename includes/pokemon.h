@@ -28,10 +28,12 @@ public:
     string GetName();
     void Print();
     vector<string> GetTypes();
+    vector<Move> GetMoves();
     int GetAttack();
     int GetDefense();
+    int GetSpecial();
     void ressurrectPokemon();
-    void takeDamage(int damage);
+    void TakeDamage(int damage);
     void printPartyFormat();
     int GetIndex();
     double GetMultiplier(const string &type);

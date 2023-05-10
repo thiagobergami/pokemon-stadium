@@ -3,6 +3,7 @@
 
 #include "pokemon.h"
 #include "player.h"
+#include "cpu.h"
 
 #include <vector>
 #include <iostream>
@@ -24,6 +25,7 @@ public:
 private:
     vector<Pokemon *> m_battlePokemons;
     Player *m_player;
+    vector<Cpu *> m_cpus;
 };
 
 #endif
