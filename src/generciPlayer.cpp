@@ -26,15 +26,16 @@ bool GenericPlayer::IsDefeated() const
 
 Pokemon *GenericPlayer::activatePokemon(int index)
 {
+    Pokemon *chosen_pokemon;
     for (const auto &pokemon : m_pokemons)
     {
         if (index == pokemon->GetIndex())
         {
-            return pokemon;
+            chosen_pokemon = pokemon;
         }
     }
-    cout << "Pokemon not found" << endl;
-    return nullptr;
+
+    return chosen_pokemon;
 }
 /*
 
@@ -82,7 +83,7 @@ double GenericPlayer::CalculateDamage(Move attacker_move, Pokemon *attacker_poke
     }
     srand(time(nullptr));
     int randomNumber = rand() % 39 + 217;
-    
+
     double damage = (bdmg * stab * modifier) / randomNumber;
 
     return damage;

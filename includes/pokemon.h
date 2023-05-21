@@ -25,7 +25,7 @@ public:
 
     ~Pokemon();
 
-    string GetName();
+    string GetName() const;
     void Print();
     vector<string> GetTypes();
     vector<Move> GetMoves();

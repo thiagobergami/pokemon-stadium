@@ -2,6 +2,8 @@
 #define PLAYER_H
 
 #include "genericPlayer.h"
+#include "pokemon.h"
+#include "move.h"
 
 class Player : public GenericPlayer
 {
@@ -10,8 +12,9 @@ public:
 
     virtual ~Player();
 
-    Pokemon *ChangePokemon();
+    void ChangePokemon();
     void FullRevivePokemon();
+    void GiveDamage(Pokemon *cpu_pokemon);
 };
 
 #endif

@@ -21,7 +21,7 @@ public:
     void Loss();
     Pokemon *activatePokemon(int index);
     bool validatePartyPokemon(int index);
-    double CalculateDamageCalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier);
+    double CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier);
 
 protected:
     string m_Name;

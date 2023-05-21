@@ -22,25 +22,25 @@ Cpu::~Cpu()
 
 void Cpu::GiveDamageToPlayer(Pokemon *my_pokemon, Pokemon *player_pokemon)
 {
-    vector<Move> myMoves = myPokemon->GetMoves();
+    vector<Move> my_moves = my_pokemon->GetMoves();
     double player_pokemon_multiplier = 0.0;
-    Move attacker_move = chosenMove[0];
-    for (const auto &move : myMoves)
+    Move attacker_move = my_moves[0];
+    for (const Move &move : my_moves)
     {
-        double pokemon_type = playerPokemon->GetMultiplier(move.type);
-        if (pokemon_type = > player_pokemon_multiplier)
+        double pokemon_type = player_pokemon->GetMultiplier(move.type);
+        if (pokemon_type >= player_pokemon_multiplier)
         {
             player_pokemon_multiplier = pokemon_type;
-            if (move.power = > chosen_move.power)
+            if (move.power >= attacker_move.power)
             {
                 attacker_move = move;
             }
         }
     }
-    double damage = CalculateDamageCalculateDamage(attacker_move,
-                                                   attack_pokemon = my_pokemon,
-                                                   defenser_pokemon = player_pokemon,
-                                                   modifier = player_pokemon_multiplier);
+    double damage = CalculateDamage(attacker_move,
+                                                   my_pokemon,
+                                                   player_pokemon,
+                                                   player_pokemon_multiplier);
 
-    player_pokemon->takeDamage(damage);
+    player_pokemon->TakeDamage(damage);
 }

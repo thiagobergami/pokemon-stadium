@@ -24,7 +24,10 @@ Pokemon::Pokemon(
 }
 
 Pokemon::~Pokemon(){};
-
+string Pokemon::GetName() const
+{
+    return m_name;
+}
 void Pokemon::Print()
 {
     cout << "ID: " << m_index << " - ";
@@ -74,13 +77,6 @@ void Pokemon::TakeDamage(int damage)
 
 void Pokemon::printPartyFormat()
 {
-
-    for (const auto &move : m_moves)
-    {
-        cout << "Name :" << move.name << " - "
-             << "Type: " << move.type << endl;
-    }
-
     string isAlive;
     if (m_isAlive == false)
     {

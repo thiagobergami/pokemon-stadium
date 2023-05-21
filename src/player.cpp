@@ -4,19 +4,19 @@ Player::Player(const string &name, const int &totalPokemons) : GenericPlayer(nam
 
 Player::~Player(){};
 
-Pokemon *Player::ChangePokemon()
+void Player::ChangePokemon()
 {
     int index;
     printParty();
     do
     {
-        cout << "Choose the pokemon you want to change: ";
+        cout << "Choose the pokemon you want: ";
         cin >> index;
         cout << "\n";
     } while (!validatePartyPokemon(index));
 
     Pokemon *pokemon = activatePokemon(index);
-    return pokemon;
+    m_activated_pokemon = pokemon;
 }
 
 void Player::FullRevivePokemon()
@@ -25,4 +25,8 @@ void Player::FullRevivePokemon()
     {
         pokemon->ressurrectPokemon();
     }
+}
+
+void Player::GiveDamage(Pokemon *cpu_pokemon)
+{
 }

@@ -13,12 +13,14 @@ public:
     virtual ~Party();
 
     void addPokemon(Pokemon *aPokemon);
+    void RemovePokemon(Pokemon *aPokemon);
     void Clear();
-
     void printParty();
+    Pokemon *GetActivatedPokemon() const;
 
 protected:
     vector<Pokemon *> m_pokemons;
+    Pokemon *m_activated_pokemon;
 };
 
 #endif
