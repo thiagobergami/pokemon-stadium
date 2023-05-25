@@ -11,7 +11,7 @@ public:
     Cpu(const string &name);
 
     virtual ~Cpu();
-
+    void DefineActivatePokemon();
     void GiveDamageToPlayer(Pokemon *myPokemon, Pokemon *playerPokemon);
 
 private:

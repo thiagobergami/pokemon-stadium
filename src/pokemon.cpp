@@ -20,7 +20,6 @@ Pokemon::Pokemon(
                                 m_moves(moves)
 {
     m_isAlive = true;
-    printPartyFormat();
 }
 
 Pokemon::~Pokemon(){};

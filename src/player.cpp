@@ -19,6 +19,18 @@ void Player::ChangePokemon()
     m_activated_pokemon = pokemon;
 }
 
+void Player::PrintCombat() const
+{
+    vector<Move> activated_pokemon_move = m_activated_pokemon->GetMoves();
+    int index = 1;
+    cout << "Choose attack by index: \n";
+    for (const Move &move : activated_pokemon_move)
+    {
+        cout << index << " - " << move.name << " - " << move.type << " - " << move.power << endl;
+        index++;
+    }
+}
+
 void Player::FullRevivePokemon()
 {
     for (auto &pokemon : m_pokemons)

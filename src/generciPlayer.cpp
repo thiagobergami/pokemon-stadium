@@ -24,6 +24,16 @@ bool GenericPlayer::IsDefeated() const
     return m_isDefeated;
 }
 
+int GenericPlayer::GetTotalPokemons() const
+{
+    return totalPokemons;
+}
+
+string GenericPlayer::GetName() const
+{
+    return m_Name;
+}
+
 Pokemon *GenericPlayer::activatePokemon(int index)
 {
     Pokemon *chosen_pokemon;

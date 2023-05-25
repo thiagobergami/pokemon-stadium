@@ -13,7 +13,10 @@ Cpu::Cpu(const string &name) : GenericPlayer(name, 0)
     int random_number = rand() % 4 + 3;
     totalPokemons = random_number;
 };
-
+void Cpu::DefineActivatePokemon()
+{
+    m_activated_pokemon = m_pokemons[0];
+}
 Cpu::~Cpu()
 {
     cout << m_Name << " was defeated";
@@ -38,9 +41,9 @@ void Cpu::GiveDamageToPlayer(Pokemon *my_pokemon, Pokemon *player_pokemon)
         }
     }
     double damage = CalculateDamage(attacker_move,
-                                                   my_pokemon,
-                                                   player_pokemon,
-                                                   player_pokemon_multiplier);
+                                    my_pokemon,
+                                    player_pokemon,
+                                    player_pokemon_multiplier);
 
     player_pokemon->TakeDamage(damage);
 }
