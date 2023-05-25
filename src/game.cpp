@@ -50,9 +50,15 @@ void Game::Play()
 {
     cout << m_cpus[0]->GetName() << " wants to fight with you\n\n";
     cout << m_cpus[0]->GetName() << " choose " << m_cpus[0]->GetActivatedPokemon()->GetName() << "\n\n";
+
     cout << "GO! " << m_player->GetActivatedPokemon()->GetName() << "!\n\n";
 
-    m_player->PrintCombat();
+    int move_option;
+    do
+    {
+        move_option = m_player->ChooseCombatOption();
+    } while ((move_option < 1 || move_option > 4) && move_option != 99);
+    
     /*
     5 - Combate acontece
         5.1 - P1 dá dano no P2.
