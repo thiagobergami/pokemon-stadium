@@ -49,5 +49,7 @@ int main()
     game->GenerateCPUs(pokedex);
     game->Play();
 
+    game->~Game();
+    
     return 0;
 }

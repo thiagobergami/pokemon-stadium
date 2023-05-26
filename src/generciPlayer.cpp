@@ -67,7 +67,11 @@ bool GenericPlayer::validatePartyPokemon(int index)
     return false;
 }
 
-double GenericPlayer::CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier)
+double GenericPlayer::CalculateDamage(
+    Move attacker_move,
+    Pokemon *attacker_pokemon,
+    Pokemon *defenser_pokemon,
+    double modifier)
 {
     int A = 42; // considering all pokemons have level 100
     int P = attacker_move.power;

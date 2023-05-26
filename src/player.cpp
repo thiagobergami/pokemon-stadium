@@ -19,7 +19,7 @@ void Player::ChangePokemon()
     m_activated_pokemon = pokemon;
 }
 
-int Player::ChooseCombatOption() const
+int Player::ChooseCombatOption()
 {
     vector<Move> activated_pokemon_move = m_activated_pokemon->GetMoves();
     int index = 1;
@@ -43,6 +43,24 @@ void Player::FullRevivePokemon()
     }
 }
 
-void Player::GiveDamage(Pokemon *cpu_pokemon)
+void Player::GiveDamage(Pokemon *cpu_pokemon, int move_index)
 {
+    Move move = m_activated_pokemon->GetMoveByIndex(move_index);
+    vector<string> cpu_types = cpu_pokemon->GetTypes();
+    double modifier;
+    if (cpu_types.size() > 1)
+    {
+        double modifier_1 = m_activated_pokemon->GetMultiplier(cpu_types[0]);
+        double modifier_2 = m_activated_pokemon->GetMultiplier(cpu_types[1]);
+        modifier = (modifier_1 > modifier_2) ? modifier_1 : modifier_2;
+    }
+    else
+    {
+        modifier = m_activated_pokemon->GetMultiplier(cpu_types[0]);
+    }
+    cout << modifier;
+
+    double damage = CalculateDamage(move, m_activated_pokemon, cpu_pokemon, modifier);
+    cout << damage;
+    cpu_pokemon->TakeDamage(damage);
 }

@@ -29,14 +29,15 @@ public:
     void Print();
     vector<string> GetTypes();
     vector<Move> GetMoves();
+    Move GetMoveByIndex(int index);
     int GetAttack();
     int GetDefense();
     int GetSpecial();
     void ressurrectPokemon();
-    void TakeDamage(int damage);
+    void TakeDamage(double damage);
     void printPartyFormat();
     int GetIndex();
-    double GetMultiplier(const string &type);
+    double GetMultiplier(const string type);
 
 private:
     int m_index;
