@@ -29,14 +29,16 @@ public:
     void Print();
     vector<string> GetTypes();
     vector<Move> GetMoves();
+    Move GetMoveByIndex(int index);
     int GetAttack();
     int GetDefense();
     int GetSpecial();
+    bool IsAlived() const;
     void ressurrectPokemon();
     void TakeDamage(int damage);
     void printPartyFormat();
     int GetIndex();
-    double GetMultiplier(const string &type);
+    double GetMultiplier(const string type);
 
 private:
     int m_index;
@@ -44,6 +46,7 @@ private:
     vector<string> m_types;
     map<string, double> m_multipliers;
     int m_hitPoints;
+    int m_maxHitPoints;
     bool m_isAlive;
     int m_attack;
     int m_defense;

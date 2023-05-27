@@ -34,7 +34,7 @@ int main()
         if (validate == true)
         {
             ++counter;
-            player->addPokemon(pokedex->getPokemon(index));
+            player->addPokemon(pokedex->getPokemon(index, 300));
         }
         else
         {
@@ -43,31 +43,13 @@ int main()
     } while (counter <= 3);
 
     player->ChangePokemon();
-    player->GetActivatedPokemon()->Print();
-    /*  cout << "That's you party: \n";
-     player->printParty();
-     do
-     {
-         int index;
-         cout << "\nOk. Choose your the pokemon that will start the battle by index";
-         cin >> index;
-         bool validate = pokedex->validateIndex(index);
-         if (validate == true)
-         {
-             Pokemon *activated_pokemon = pokedex->getPokemon(index);
-             player->activatePokemon(activated_pokemon);
-         }
-         else
-         {
-             cout << "\nInvalid Option. Try again";
-         }
-     } while (player->GetActivatedPokemon()->GetName().empty());
-
-     cout << player->GetActivatedPokemon()->GetName();
-     /* player->activatePokemon(1); */
-    /*
     game->AddPlayer(player);
-    player->ChangePokemon(); */
 
+    // generate CPU
+    game->GenerateCPUs(pokedex);
+    game->Play();
+
+    game->~Game();
+    
     return 0;
 }

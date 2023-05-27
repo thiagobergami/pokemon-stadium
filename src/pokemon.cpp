@@ -20,7 +20,7 @@ Pokemon::Pokemon(
                                 m_moves(moves)
 {
     m_isAlive = true;
-    printPartyFormat();
+    m_maxHitPoints = m_hitPoints;
 }
 
 Pokemon::~Pokemon(){};
@@ -53,6 +53,7 @@ vector<string> Pokemon::GetTypes()
 };
 void Pokemon::ressurrectPokemon()
 {
+    m_hitPoints = m_maxHitPoints;
     m_isAlive = true;
 }
 int Pokemon::GetAttack()
@@ -65,7 +66,7 @@ int Pokemon::GetDefense()
 }
 void Pokemon::TakeDamage(int damage)
 {
-    cout << m_name << "Takes " << damage << endl;
+    cout << m_name << " takes " << damage << endl;
     m_hitPoints = m_hitPoints - damage;
 
     if (m_hitPoints <= 0)
@@ -73,6 +74,15 @@ void Pokemon::TakeDamage(int damage)
         m_isAlive = false;
         cout << m_name << " Faited" << endl;
     }
+    else
+    {
+        cout << m_name << " total HP is: " << m_hitPoints << endl;
+    }
+}
+
+bool Pokemon::IsAlived() const
+{
+    return m_isAlive;
 }
 
 void Pokemon::printPartyFormat()
@@ -99,7 +109,7 @@ int Pokemon::GetSpecial()
     return m_special;
 };
 
-double Pokemon::GetMultiplier(const string &type)
+double Pokemon::GetMultiplier(const string type)
 {
     double dmg_multiplier = m_multipliers[type];
     return dmg_multiplier;
@@ -107,4 +117,9 @@ double Pokemon::GetMultiplier(const string &type)
 vector<Move> Pokemon::GetMoves()
 {
     return m_moves;
+}
+
+Move Pokemon::GetMoveByIndex(int index)
+{
+    return m_moves[index];
 }

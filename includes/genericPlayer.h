@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include "party.h"
 #include "pokemon.h"
 #include "move.h"
@@ -16,12 +17,15 @@ public:
 
     virtual ~GenericPlayer();
 
+    string GetName() const;
     bool IsDefeated() const;
     void Win() const;
     void Loss();
     Pokemon *activatePokemon(int index);
     bool validatePartyPokemon(int index);
-    double CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier);
+    int GetTotalPokemonsAlive();
+    int GetMaxAllowedPokemons() const;
+    int CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier);
 
 protected:
     string m_Name;

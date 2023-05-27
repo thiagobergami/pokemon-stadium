@@ -22,7 +22,7 @@ public:
 
     virtual ~Pokedex();
 
-    Pokemon *getPokemon(int index);
+    Pokemon *getPokemon(int index, const int move_power_cap);
     void Populate();
     void printPokedex();
     bool validateIndex(int &index) const;

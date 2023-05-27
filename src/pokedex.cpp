@@ -39,8 +39,8 @@ void Pokedex::Populate()
 
     cout << "Pokedex Loaded." << endl;
 }
-
-Pokemon *Pokedex::getPokemon(int index)
+/* add power cap here */
+Pokemon *Pokedex::getPokemon(int index, const int move_power_cap)
 {
     string key = to_string(index);
     json &pokemon_data = m_data[key];
@@ -54,6 +54,8 @@ Pokemon *Pokedex::getPokemon(int index)
     int while_validator = 0;
     mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
     uniform_int_distribution<int> dist(0, m_types.size() - 1);
+
+    /* what I'm trying to do here???? */
     while (while_validator < 4)
     {
         if (while_validator == 0)
@@ -70,7 +72,6 @@ Pokemon *Pokedex::getPokemon(int index)
         else
         {
             int random_index = dist(rng);
-            cout << "Random " << random_index << endl;
             types_to_choose.push_back(m_types[random_index]);
             ++while_validator;
         }
@@ -103,7 +104,7 @@ Pokemon *Pokedex::getPokemon(int index)
         all_moves.push_back(myMove);
     }
     sort(all_moves.begin(), all_moves.end(), sortByPower);
-    vector<Move> moves = DefineMoves(80, all_moves, types_to_choose);
+    vector<Move> moves = DefineMoves(move_power_cap, all_moves, types_to_choose);
 
     Pokemon *newPokemon = new Pokemon(
         index,

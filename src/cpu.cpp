@@ -13,16 +13,33 @@ Cpu::Cpu(const string &name) : GenericPlayer(name, 0)
     int random_number = rand() % 4 + 3;
     totalPokemons = random_number;
 };
-
+void Cpu::DefineActivatePokemon()
+{
+    m_activated_pokemon = m_pokemons[0];
+    if (m_pokemons[0]->IsAlived() == false)
+    {
+        delete m_pokemons[0];
+        m_pokemons.erase(m_pokemons.begin());
+        if (m_pokemons.size() != 0)
+        {
+            m_activated_pokemon = m_pokemons[0];
+            cout << "\n\n"
+                 << m_Name
+                 << " change to "
+                 << m_activated_pokemon->GetName()
+                 << endl;
+        }
+    }
+}
 Cpu::~Cpu()
 {
     cout << m_Name << " was defeated";
     cout << "\n\n";
 };
 
-void Cpu::GiveDamageToPlayer(Pokemon *my_pokemon, Pokemon *player_pokemon)
+void Cpu::GiveDamageToPlayer(Pokemon *player_pokemon)
 {
-    vector<Move> my_moves = my_pokemon->GetMoves();
+    vector<Move> my_moves = m_activated_pokemon->GetMoves();
     double player_pokemon_multiplier = 0.0;
     Move attacker_move = my_moves[0];
     for (const Move &move : my_moves)
@@ -37,10 +54,11 @@ void Cpu::GiveDamageToPlayer(Pokemon *my_pokemon, Pokemon *player_pokemon)
             }
         }
     }
-    double damage = CalculateDamage(attacker_move,
-                                                   my_pokemon,
-                                                   player_pokemon,
-                                                   player_pokemon_multiplier);
+    cout << m_activated_pokemon->GetName() << " Will use " << attacker_move.name << endl;
+    int damage = CalculateDamage(attacker_move,
+                                 m_activated_pokemon,
+                                 player_pokemon,
+                                 player_pokemon_multiplier);
 
     player_pokemon->TakeDamage(damage);
 }
