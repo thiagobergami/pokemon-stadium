@@ -46,6 +46,7 @@ private:
     vector<string> m_types;
     map<string, double> m_multipliers;
     int m_hitPoints;
+    int m_maxHitPoints;
     bool m_isAlive;
     int m_attack;
     int m_defense;

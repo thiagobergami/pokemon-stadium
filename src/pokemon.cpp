@@ -20,6 +20,7 @@ Pokemon::Pokemon(
                                 m_moves(moves)
 {
     m_isAlive = true;
+    m_maxHitPoints = m_hitPoints;
 }
 
 Pokemon::~Pokemon(){};
@@ -52,6 +53,7 @@ vector<string> Pokemon::GetTypes()
 };
 void Pokemon::ressurrectPokemon()
 {
+    m_hitPoints = m_maxHitPoints;
     m_isAlive = true;
 }
 int Pokemon::GetAttack()
@@ -71,6 +73,10 @@ void Pokemon::TakeDamage(int damage)
     {
         m_isAlive = false;
         cout << m_name << " Faited" << endl;
+    }
+    else
+    {
+        cout << m_name << " total HP is: " << m_hitPoints << endl;
     }
 }
 
