@@ -53,11 +53,11 @@ void Game::Play()
 
     cout << "GO! " << m_player->GetActivatedPokemon()->GetName() << "!\n\n";
 
-    int move_option = 1;
-    /* do
+    int move_option;
+    do
     {
         move_option = m_player->ChooseCombatOption();
-    } while ((move_option < 1 || move_option > 4) && move_option != 99); */
+    } while ((move_option < 1 || move_option > 4) && move_option != 99);
     m_player->GiveDamage(m_cpus[0]->GetActivatedPokemon(), move_option - 1);
     /*
     5 - Combate acontece

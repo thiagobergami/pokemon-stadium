@@ -73,6 +73,12 @@ double GenericPlayer::CalculateDamage(
     Pokemon *defenser_pokemon,
     double modifier)
 {
+
+    if (modifier >= 2.0)
+    {
+        cout << "It's super effective!\n"
+             << endl;
+    }
     int A = 42; // considering all pokemons have level 100
     int P = attacker_move.power;
     int A_D;
@@ -97,8 +103,7 @@ double GenericPlayer::CalculateDamage(
     }
     srand(time(nullptr));
     int randomNumber = rand() % 39 + 217;
-
-    double damage = (bdmg * stab * modifier) / randomNumber;
+    double damage = (bdmg * stab * modifier) * randomNumber / 255;
 
     return damage;
 }

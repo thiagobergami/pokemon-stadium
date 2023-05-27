@@ -45,7 +45,14 @@ void Player::FullRevivePokemon()
 
 void Player::GiveDamage(Pokemon *cpu_pokemon, int move_index)
 {
+
     Move move = m_activated_pokemon->GetMoveByIndex(move_index);
+
+    cout << m_activated_pokemon->GetName()
+         << " used "
+         << move.name << "\n"
+         << endl;
+
     vector<string> cpu_types = cpu_pokemon->GetTypes();
     double modifier;
     if (cpu_types.size() > 1)
@@ -58,9 +65,7 @@ void Player::GiveDamage(Pokemon *cpu_pokemon, int move_index)
     {
         modifier = m_activated_pokemon->GetMultiplier(cpu_types[0]);
     }
-    cout << modifier;
-
     double damage = CalculateDamage(move, m_activated_pokemon, cpu_pokemon, modifier);
-    cout << damage;
+
     cpu_pokemon->TakeDamage(damage);
 }
