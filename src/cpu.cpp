@@ -15,17 +15,21 @@ Cpu::Cpu(const string &name) : GenericPlayer(name, 0)
 };
 void Cpu::DefineActivatePokemon()
 {
+    m_activated_pokemon = m_pokemons[0];
     if (m_pokemons[0]->IsAlived() == false)
     {
         delete m_pokemons[0];
         m_pokemons.erase(m_pokemons.begin());
+        if (m_pokemons.size() != 0)
+        {
+            m_activated_pokemon = m_pokemons[0];
+            cout << "\n\n"
+                 << m_Name
+                 << " change to "
+                 << m_activated_pokemon->GetName()
+                 << endl;
+        }
     }
-    m_activated_pokemon = m_pokemons[0];
-    cout << "\n\n"
-         << m_Name
-         << " change to "
-         << m_activated_pokemon->GetName()
-         << endl;
 }
 Cpu::~Cpu()
 {
@@ -51,10 +55,10 @@ void Cpu::GiveDamageToPlayer(Pokemon *player_pokemon)
         }
     }
     cout << m_activated_pokemon->GetName() << " Will use " << attacker_move.name << endl;
-    double damage = CalculateDamage(attacker_move,
-                                    m_activated_pokemon,
-                                    player_pokemon,
-                                    player_pokemon_multiplier);
+    int damage = CalculateDamage(attacker_move,
+                                 m_activated_pokemon,
+                                 player_pokemon,
+                                 player_pokemon_multiplier);
 
     player_pokemon->TakeDamage(damage);
 }

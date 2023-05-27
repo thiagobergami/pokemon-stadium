@@ -54,18 +54,8 @@ void Player::GiveDamage(Pokemon *cpu_pokemon, int move_index)
          << endl;
 
     vector<string> cpu_types = cpu_pokemon->GetTypes();
-    double modifier;
-    if (cpu_types.size() > 1)
-    {
-        double modifier_1 = m_activated_pokemon->GetMultiplier(cpu_types[0]);
-        double modifier_2 = m_activated_pokemon->GetMultiplier(cpu_types[1]);
-        modifier = (modifier_1 > modifier_2) ? modifier_1 : modifier_2;
-    }
-    else
-    {
-        modifier = m_activated_pokemon->GetMultiplier(cpu_types[0]);
-    }
-    double damage = CalculateDamage(move, m_activated_pokemon, cpu_pokemon, modifier);
+    double modifier = cpu_pokemon->GetMultiplier(move.type);
+    int damage = CalculateDamage(move, m_activated_pokemon, cpu_pokemon, modifier);
 
     cpu_pokemon->TakeDamage(damage);
 }

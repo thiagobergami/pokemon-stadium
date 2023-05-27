@@ -95,31 +95,32 @@ int GenericPlayer::CalculateDamage(
         cout << "It's super effective!\n"
              << endl;
     }
-    int A = 42; // considering all pokemons have level 100
+    int A = 10; // considering all pokemons have level 20
     int P = attacker_move.power;
     int A_D;
     if (attacker_move.move_class == "physical")
     {
-        A_D = attacker_pokemon->GetAttack() / defenser_pokemon->GetDefense();
+        A_D = ceil(attacker_pokemon->GetAttack() / defenser_pokemon->GetDefense());
     }
     else
     {
-        A_D = attacker_pokemon->GetSpecial() / defenser_pokemon->GetSpecial();
+        A_D = ceil(attacker_pokemon->GetSpecial() / defenser_pokemon->GetSpecial());
     }
+    A_D = A_D == 0 ? 1 : A_D;
 
-    int bdmg = ((A * P * A_D) / 50) + 2; // base damage
+    double bdmg = ((A * P * A_D) / 50) + 2; // base damage
     double stab = 1.0;
 
     for (const auto &type : attacker_pokemon->GetTypes())
     {
-        if (type == attacker_move.name)
+        if (type == attacker_move.type)
         {
             stab = 1.5;
         }
     }
     srand(time(nullptr));
     int randomNumber = rand() % 39 + 217;
-    int damage = round((bdmg * stab * modifier) * randomNumber / 255);
+    int damage = round((bdmg * stab * modifier) * randomNumber / 255) + 1;
 
     return damage;
 }
