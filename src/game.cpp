@@ -57,7 +57,11 @@ void Game::Play()
     do
     {
         move_option = m_player->ChooseCombatOption();
-    } while ((move_option < 1 || move_option > 4) && move_option != 99);
+        if (move_option == 99)
+        {
+            m_player->ChangePokemon();
+        }
+    } while (move_option < 1 || move_option > 4);
     m_player->GiveDamage(m_cpus[0]->GetActivatedPokemon(), move_option - 1);
     /*
     5 - Combate acontece
