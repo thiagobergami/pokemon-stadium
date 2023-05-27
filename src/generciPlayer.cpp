@@ -6,7 +6,14 @@ GenericPlayer::GenericPlayer(const string &name, const int &totalPokemons)
 {
     m_isDefeated = false;
 };
-GenericPlayer::~GenericPlayer(){};
+GenericPlayer::~GenericPlayer()
+{
+    for (Pokemon *pokemon : m_pokemons)
+    {
+        cout << "Deleting " << pokemon->GetName() << endl;
+        delete pokemon;
+    }
+};
 
 void GenericPlayer::Win() const
 {
@@ -24,8 +31,16 @@ bool GenericPlayer::IsDefeated() const
     return m_isDefeated;
 }
 
-int GenericPlayer::GetTotalPokemons() const
+int GenericPlayer::GetTotalPokemonsAlive() const
 {
+    int totalPokemons = 0;
+    for (const auto *pokemon : m_pokemons)
+    {
+        if (pokemon->IsAlived())
+        {
+            ++totalPokemons;
+        }
+    }
     return totalPokemons;
 }
 
@@ -67,7 +82,7 @@ bool GenericPlayer::validatePartyPokemon(int index)
     return false;
 }
 
-double GenericPlayer::CalculateDamage(
+int GenericPlayer::CalculateDamage(
     Move attacker_move,
     Pokemon *attacker_pokemon,
     Pokemon *defenser_pokemon,
@@ -103,7 +118,7 @@ double GenericPlayer::CalculateDamage(
     }
     srand(time(nullptr));
     int randomNumber = rand() % 39 + 217;
-    double damage = (bdmg * stab * modifier) * randomNumber / 255;
+    int damage = round((bdmg * stab * modifier) * randomNumber / 255);
 
     return damage;
 }

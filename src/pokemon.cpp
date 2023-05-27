@@ -62,7 +62,7 @@ int Pokemon::GetDefense()
 {
     return m_defense;
 }
-void Pokemon::TakeDamage(double damage)
+void Pokemon::TakeDamage(int damage)
 {
     cout << m_name << " takes " << damage << endl;
     m_hitPoints = m_hitPoints - damage;
@@ -72,6 +72,11 @@ void Pokemon::TakeDamage(double damage)
         m_isAlive = false;
         cout << m_name << " Faited" << endl;
     }
+}
+
+void Pokemon::IsAlived()
+{
+    return m_isAlive;
 }
 
 void Pokemon::printPartyFormat()

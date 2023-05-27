@@ -21,6 +21,7 @@ public:
     void calculateDamage(int attackerIndex, int defenserInde);
     bool isGameOver();
     void Play();
+    bool ValidadeActivatedCPU();
     void ChangePokemonBattle();
     void AddPlayer(Player *player);
     void GenerateCPUs(Pokedex *pokedex);

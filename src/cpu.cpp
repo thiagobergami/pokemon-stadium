@@ -19,7 +19,7 @@ void Cpu::DefineActivatePokemon()
 }
 Cpu::~Cpu()
 {
-    cout << m_Name << " was defeated";
+    cout << m_Name << " was defeated";    
     cout << "\n\n";
 };
 

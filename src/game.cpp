@@ -46,23 +46,58 @@ void Game::GenerateCPUs(Pokedex *pokedex)
     }
 }
 
+bool Game::ValidadeActivatedCPU()
+{   
+    if (m_cpus[0]->GetTotalPokemonsAlive() == 0)
+    {
+        return false;        
+    }
+    return true;
+    /*
+    Validar se o pokemon atual foi derrotado
+    Dar um pop caso ele tenha sido derrotado
+    Caso não tenho mais pokemon, retornar que CPU valido was defeated.
+     */
+}
+
 void Game::Play()
 {
-    cout << m_cpus[0]->GetName() << " wants to fight with you\n\n";
-    cout << m_cpus[0]->GetName() << " choose " << m_cpus[0]->GetActivatedPokemon()->GetName() << "\n\n";
+    bool presentation_made = false;
 
-    cout << "GO! " << m_player->GetActivatedPokemon()->GetName() << "!\n\n";
-
-    int move_option;
     do
     {
-        move_option = m_player->ChooseCombatOption();
-        if (move_option == 99)
+        if (!presentation_made)
         {
-            m_player->ChangePokemon();
+            system("clear");
+            cout << m_cpus[0]->GetName() << " wants to fight with you\n\n";
+            presentation_made = true;
         }
-    } while (move_option < 1 || move_option > 4);
-    m_player->GiveDamage(m_cpus[0]->GetActivatedPokemon(), move_option - 1);
+        cout << m_cpus[0]->GetName() << " choose " << m_cpus[0]->GetActivatedPokemon()->GetName() << "\n\n";
+        cout << "GO! " << m_player->GetActivatedPokemon()->GetName() << "!\n\n";
+
+        int move_option;
+        do
+        {
+            move_option = m_player->ChooseCombatOption();
+            if (move_option == 99)
+            {
+                m_player->ChangePokemon();
+            }
+        } while (move_option < 1 || move_option > 4);
+        m_player->GiveDamage(m_cpus[0]->GetActivatedPokemon(), move_option - 1);
+
+        bool is_next_battle = ValidadeActivatedCPU();
+        /* 
+         1 - Validar se o Pokemon da CPU está vivo ainda
+         2 - Caso esteja, continua a luta
+            3 - Caso contrário, troque para próximo da fila
+        
+         */
+        delete m_cpus[0];
+        m_cpus.erase(m_cpus.begin());
+        presentation_made = false;
+    } while (m_cpus.size() > 0);
+
     /*
     5 - Combate acontece
         5.1 - P1 dá dano no P2.

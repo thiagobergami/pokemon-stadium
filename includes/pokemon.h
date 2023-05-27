@@ -33,8 +33,9 @@ public:
     int GetAttack();
     int GetDefense();
     int GetSpecial();
+    bool IsAlived();
     void ressurrectPokemon();
-    void TakeDamage(double damage);
+    void TakeDamage(int damage);
     void printPartyFormat();
     int GetIndex();
     double GetMultiplier(const string type);
