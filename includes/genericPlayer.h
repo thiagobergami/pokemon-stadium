@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include "party.h"
 #include "pokemon.h"
 #include "move.h"
@@ -22,7 +23,8 @@ public:
     void Loss();
     Pokemon *activatePokemon(int index);
     bool validatePartyPokemon(int index);
-    int GetTotalPokemonsAlive() const;
+    int GetTotalPokemonsAlive();
+    int GetMaxAllowedPokemons() const;
     int CalculateDamage(Move attacker_move, Pokemon *attacker_pokemon, Pokemon *defenser_pokemon, double modifier);
 
 protected:

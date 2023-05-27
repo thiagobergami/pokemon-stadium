@@ -33,7 +33,7 @@ public:
     int GetAttack();
     int GetDefense();
     int GetSpecial();
-    bool IsAlived();
+    bool IsAlived() const;
     void ressurrectPokemon();
     void TakeDamage(int damage);
     void printPartyFormat();

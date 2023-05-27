@@ -80,7 +80,7 @@ void Pokemon::TakeDamage(int damage)
     }
 }
 
-void Pokemon::IsAlived()
+bool Pokemon::IsAlived() const
 {
     return m_isAlive;
 }
@@ -112,7 +112,6 @@ int Pokemon::GetSpecial()
 double Pokemon::GetMultiplier(const string type)
 {
     double dmg_multiplier = m_multipliers[type];
-    cout << "To " << type << " the multiplier is " << dmg_multiplier << endl;
     return dmg_multiplier;
 }
 vector<Move> Pokemon::GetMoves()

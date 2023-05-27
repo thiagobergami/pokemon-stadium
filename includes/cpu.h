@@ -12,7 +12,7 @@ public:
 
     virtual ~Cpu();
     void DefineActivatePokemon();
-    void GiveDamageToPlayer(Pokemon *myPokemon, Pokemon *playerPokemon);
+    void GiveDamageToPlayer(Pokemon *playerPokemon);
 
 private:
 };

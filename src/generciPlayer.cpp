@@ -31,7 +31,7 @@ bool GenericPlayer::IsDefeated() const
     return m_isDefeated;
 }
 
-int GenericPlayer::GetTotalPokemonsAlive() const
+int GenericPlayer::GetTotalPokemonsAlive()
 {
     int totalPokemons = 0;
     for (const auto *pokemon : m_pokemons)
@@ -71,8 +71,9 @@ bool GenericPlayer::validatePartyPokemon(int index)
 {
     for (const auto &pokemon : m_pokemons)
     {
-        if (index == pokemon->GetIndex())
+        if (index == pokemon->GetIndex() && pokemon->IsAlived())
         {
+            cout << pokemon->GetIndex() << endl;
             return true;
         }
     }
@@ -121,4 +122,8 @@ int GenericPlayer::CalculateDamage(
     int damage = round((bdmg * stab * modifier) * randomNumber / 255);
 
     return damage;
+}
+int GenericPlayer::GetMaxAllowedPokemons() const
+{
+    return totalPokemons;
 }
