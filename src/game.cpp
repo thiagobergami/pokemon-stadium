@@ -4,19 +4,15 @@ Game::Game(){};
 
 Game::~Game()
 {
-    delete m_player;
-    for (Cpu *cpu : m_cpus)
-    {
-        delete cpu;
-    }
+    cout << "Game is shuting closing... " << endl;
 };
 
-void Game::AddPlayer(Player *player)
+void Game::AddPlayer(shared_ptr<Player> player)
 {
     m_player = player;
 }
 
-void Game::GenerateCPUs(Pokedex *pokedex)
+void Game::GenerateCPUs(shared_ptr<Pokedex> pokedex)
 {
     srand(static_cast<unsigned int>(time(nullptr)));
     random_device rd;
@@ -34,7 +30,7 @@ void Game::GenerateCPUs(Pokedex *pokedex)
     int power_cap = 50;
     for (int i = 0; i < cpu_names.size(); ++i)
     {
-        Cpu *cpu = new Cpu(cpu_names[i]);
+        shared_ptr<Cpu> cpu = make_shared<Cpu>(cpu_names[i]);
         int total_cpu_pokemon = cpu->GetMaxAllowedPokemons();
         for (int e = 0; e < total_cpu_pokemon; ++e)
         {
@@ -93,7 +89,6 @@ void Game::Play()
 
         if (is_next_battle == false)
         {
-            delete m_cpus[0];
             m_cpus.erase(m_cpus.begin());
             presentation_made = false;
             m_player->FullRevivePokemon();

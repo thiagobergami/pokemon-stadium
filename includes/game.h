@@ -10,6 +10,7 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include <memory>
 
 using namespace std;
 
@@ -23,13 +24,13 @@ public:
     void Play();
     bool ValidadeActivatedCPU();
     void ChangePokemonBattle();
-    void AddPlayer(Player *player);
-    void GenerateCPUs(Pokedex *pokedex);
+    void AddPlayer(shared_ptr<Player> player);
+    void GenerateCPUs(shared_ptr<Pokedex> pokedex);
     // function to validate if player wins;
 
 private:
-    Player *m_player;
-    vector<Cpu *> m_cpus;
+    shared_ptr<Player> m_player;
+    vector<shared_ptr<Cpu>> m_cpus;
 };
 
 #endif
