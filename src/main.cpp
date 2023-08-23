@@ -5,10 +5,12 @@
 
 int main()
 {
-    Pokedex *pokedex = new Pokedex();
-    Game *game = new Game();
+    shared_ptr<Pokedex> pokedex = make_shared<Pokedex>();
+    unique_ptr<Game> game(new Game());
+
     char isCorrect;
     string trainerName;
+
     do
     {
         cout << "\t\tWelcome to pokemon Stadium\n\n";
@@ -19,7 +21,7 @@ int main()
         cin >> isCorrect;
     } while (isCorrect != 'Y' && isCorrect != 'y');
 
-    Player *player = new Player(trainerName, 3);
+    shared_ptr<Player> player = make_shared<Player>(trainerName, 3);
 
     pokedex->printPokedex();
     cout << "\n\nNow, choose or 3 pokemons by index: ";
@@ -48,8 +50,6 @@ int main()
     // generate CPU
     game->GenerateCPUs(pokedex);
     game->Play();
-
-    game->~Game();
     
     return 0;
 }
